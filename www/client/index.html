@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <title>ManageMe</title>
+  <meta charset="utf-8">
+  <meta name="description" content="just another time management application">
+  <meta name="author" content="Brian Kim">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- twitter bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body onload="main()">
+  <div class="container">
+    <center><h1>ManageMe</h1></center>
+    <div class="container" id="introduction">
+      <p>This app will allow you to keep track of how you are spending your time. Describe your tasks with a title and brief description as well as the time spent. Set your preferred time for work and you will see if there is any scheduling conflict between your working hours and other tasks. As you record more and more events, you will begin to see a very simple but effective overview of your work/life balance. <a href="#" id="hideIntro">Click to hide this message</a></p>
+    </div>
+    <div class="container" id="main">
+      <form id="loginForm">
+        <center><h2>Login</h2></center>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="loginUsername" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="loginSubmit">Login</button>
+        </div>
+        <div class="form-group">
+          <a href="#" id="showRegister">Don't have an account? Register</a>
+        </div>
+      </form>
+      <form id="registerForm" hidden>
+        <center><h2>Register</h2></center>
+        <div class="form-group">
+          <label for="registerUsername">Username</label>
+          <input type="text" class="form-control" id="registerUsername" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" class="form-control" id="registerEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="registerConfirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+          <label>Preferred Hours for Work</label> 
+        </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="registerPreferredHoursStart">Start</label>
+            <input type="time" class="form-control" id="registerPreferredHoursStart" placeholder="Start">
+          </div>
+          <div class="form-group">
+            <label for="registerPreferredHoursFinish">Finish</label>
+            <input type="time" class="form-control" id="registerPreferredHoursFinish" placeholder="Finish">
+          </div>
+        </div>
+        <br/>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="registerSubmit">Register</button>
+        </div>
+        <div class="form-group">
+          <a href="#" id="showLogin">Already have an account? Login</a>
+        </div>
+      </form>
+      <div id="menuView" hidden>
+        <center><h2>Main Menu</h2></center>
+        <ul id="menuList">
+        </ul>
+      </div>
+      <form id="profileView" hidden>
+        <center><h2>Profile</h2></center>
+        <div class="form-group">
+          <label for="profileUsername">Username</label>
+          <input type="text" class="form-control" id="profileUsername" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="profileEmail">Email</label>
+          <input type="email" class="form-control" id="profileEmail" placeholder="Email">
+        </div>
+        <div class="form-group" id="profileRoleGroup" hidden>
+          <label for="profileRole">Role</label>
+          <select class="form-control" id="profileRole">
+            <option>User</option>
+            <option>Manager</option>
+            <option>Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Change Password</label> 
+        </div>
+        <div class="form-group">
+          <label for="profileOldPassword">Old Password</label>
+          <input type="password" class="form-control" id="profileOldPassword" placeholder="Old Password">
+        </div>
+        <div class="form-group">
+          <label for="profileNewPassword">New Password</label>
+          <input type="password" class="form-control" id="profileNewPassword" placeholder="New Password">
+        </div>
+        <div class="form-group">
+          <label for="profileConfirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="profileConfirmPassword" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+          <label>Preferred Hours for Work</label> 
+        </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="profilePreferredHoursStart">Start</label>
+            <input type="time" class="form-control" id="profilePreferredHoursStart" placeholder="Start">
+          </div>
+          <div class="form-group">
+            <label for="profilePreferredHoursFinish">Finish</label>
+            <input type="time" class="form-control" id="profilePreferredHoursFinish" placeholder="Finish">
+          </div>
+        </div>
+        <br/>
+        <div class="form-inline">
+          <button type="button" class="btn btn-default" id="profileCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="profileSubmit">Update</button>
+        </div>
+        <br/>
+        <div class="form-inline">
+          <button type="button" class="btn btn-danger" id="profileDelete">Delete Account</button>
+        </div>
+      </form>
+      <div id="usersListView" hidden>
+        <center><h2>Users</h2></center>
+        <table id="usersList" class="table" style="cursor:pointer">
+          <tr>
+            <th><a href="#">ID</a></th>
+            <th><a href="#">Username</a></th>
+            <th><a href="#">Email</a></th>
+            <th><a href="#">Preferred Hours Start</a></th>
+            <th><a href="#">Preferred Hours Finish</a></th>
+          </tr>
+        </table>
+        <button type="button" class="btn btn-default" id="usersListBack">Back to Menu</button>
+      </div>
+      <form id="taskView" hidden>
+        <center><h2>Task</h2></center>
+        <div class="form-group">
+          <label for="taskTitle">Title</label>
+          <input type="text" class="form-control" id="taskTitle" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label for="taskDescription">Description</label>
+          <textarea class="form-control" id="taskDescription" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group" id="taskUserGroup" hidden>
+          <label for="taskUser">User</label>
+          <select class="form-control" id="taskUser">
+          </select>
+        </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="taskStartTime">Start</label>
+            <input type="datetime-local" class="form-control" id="taskStartTime" placeholder="Start">
+          </div>
+          <div class="form-group">
+            <label for="taskFinishTime">Finish</label>
+            <input type="datetime-local" class="form-control" id="taskFinishTime" placeholder="Finish">
+          </div>
+        </div>
+        <br/>
+        <div class="form-inline">
+          <button type="button" class="btn btn-default" id="taskBack">Go Back</button>
+          <button type="submit" class="btn btn-primary" id="taskUpdate">Update</button>
+        </div>
+        <br/>
+        <div class="form-inline">
+          <button type="button" class="btn btn-danger" id="taskDelete">Delete Task</button>
+        </div>
+      </form>
+      <div id="tasksListView" hidden>
+        <center><h2>Tasks</h2></center>
+        <center class="form-inline">
+          <div class="form-group">
+            <label for="tasksListFilterFrom">From</label>
+            <input type="datetime-local" class="form-control" id="tasksListFilterFrom">
+          </div>
+          <div class="form-group">
+            <label for="tasksListFilterTo">To</label>
+            <input type="datetime-local" class="form-control" id="tasksListFilterTo">
+          </div>
+          <button type="submit" class="btn btn-primary" id="tasksListFilter">Filter By Date</button>
+          <button type="submit" class="btn btn-info" id="tasksListExport">Export to HTML</button>
+        </center>
+        <br/>
+        <table id="tasksList" class="table" style="cursor:pointer">
+          <tr>
+            <th id="sortTasksListUser"><a href="#">User</a></th>
+            <th id="sortTasksListTitle"><a href="#">Title</a></th>
+            <th id="sortTasksListDesc"><a href="#">Description</a></th>
+            <th id="sortTasksListStart"><a href="#">Start Time</a></th>
+            <th id="sortTasksListFinish"><a href="#">Finish Time</a></th>
+          </tr>
+        </table>
+        <button type="button" class="btn btn-default" id="tasksListBack">Back to Menu</button>
+        <button type="button" class="btn btn-success" id="tasksListAdd">Add Task</button>
+      </div>
+    </div>
+    <br/>
+  </div>
+  
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- twitter bootstrap js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- manageme client-side mvc logic -->
+  <script src="models.js"></script>
+  <script src="views.js"></script>
+  <script src="controllers.js"></script>
+  
+</body>
+</html>

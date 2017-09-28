@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ManageMe Webapp View Unit Tests</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.4.0.css">
+</head>
+<body>
+  <!-- getLabelForInput -->
+  <div>
+    <label for="testGetLabelForInput" id="labelForInput">
+    <input id="testGetLabelForInput">
+  </div>
+
+  <!-- IntroView -->
+  <div id="introduction"></div>
+  <a id="hideIntro"></a>
+
+  <!-- MainView -->
+  <div id="registerForm"></div>
+  <div id="loginForm"></div>
+  <div id="menuView"></div>
+  <div id="profileView"></div>
+
+  <!-- LoginView -->
+  <a id="showRegister"></a>
+  <input id="loginUsername" hidden/>
+  <input id="loginPassword" hidden/>
+  <input id="loginSubmit" hidden/>
+
+  <!-- RegisterView -->
+  <a id="showLogin"></a>
+  <input id="registerUsername" hidden/>
+  <input id="registerEmail" hidden/>
+  <input id="registerPassword" hidden/>
+  <input id="registerConfirmPassword" hidden/>
+  <input id="registerPreferredHoursStart" hidden/>
+  <input id="registerPreferredHoursFinish" hidden/>
+  <input id="registerSubmit" hidden/>
+
+  <!-- ProfileView -->
+  <input id="profileUsername" hidden/>
+  <input id="profileEmail" hidden/>
+  <input id="profileOldPassword" hidden/>
+  <input id="profileNewPassword" hidden/>
+  <input id="profileConfirmPassword" hidden/>
+  <input id="profilePreferredHoursStart" hidden/>
+  <input id="profilePreferredHoursFinish" hidden/>
+  <input id="profileCancel" hidden/>
+  <input id="profileSubmit" hidden/>
+  <input id="profileDelete" hidden/>
+ 
+  <div id="qunit"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.4.0.js"></script>
+  <script src="/tests/blanket.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="/views.js" data-cover></script>
+  <script src="/tests/shared.js"></script>
+  <script src="/tests/view/tests.js"></script>
+ 
+</body>
+</html>
